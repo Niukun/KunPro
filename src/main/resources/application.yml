@@ -1,0 +1,15 @@
+# DataSource Config
+server:
+  port: 8084
+spring:
+  application:
+    name: mp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: Root@SQL#123
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/demo?useSSL=false&serverTimezone=GMT%2B8
+    username: root
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
