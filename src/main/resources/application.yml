@@ -14,3 +14,12 @@ spring:
 #mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+#zkml 员工档案数据接口
+zkml:
+  staff:
+    url: https://employee.izkml.cn/api
+  car:
+    url: https://car-files-sd.mlcfg.online
