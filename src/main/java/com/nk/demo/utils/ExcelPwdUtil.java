@@ -5,7 +5,7 @@ import org.apache.poi.poifs.crypt.Decryptor;
 import org.apache.poi.poifs.crypt.EncryptionInfo;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.IOUtils;
-import org.apache.poi.util.SystemOutLogger;
+
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

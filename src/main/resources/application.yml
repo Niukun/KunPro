@@ -16,6 +16,9 @@ spring:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
+logging:
+    level:
+      root: INFO
 
 #zkml 员工档案数据接口
 zkml:
