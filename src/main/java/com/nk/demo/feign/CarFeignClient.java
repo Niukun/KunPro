@@ -20,7 +20,11 @@ public interface CarFeignClient {
 
     //查询单位列表
     @GetMapping("/cars/getAllOrgans")
-    JsonResult<List<GetAllOrgansItem>> getAllOrgans(@RequestParam("areaId") String areaId, @RequestParam("isDirectly") String isDirectly);
+    JsonResult<List<GetAllOrgansItem>> getAllOrgans(String id, @RequestParam("areaId") String areaId);
+
+    //根据区域获取组织列表
+    @GetMapping("/cars/getOrgansName")
+    JsonResult<List<OrganInfoResponse>> getOrgansName(@RequestParam("areaId")String areaId,@RequestParam("isDirectly") String isDirectly, @RequestParam("organType") String organType);
 
     //按时间查询车辆列表
     @GetMapping("/cars/getAllCarsByOrgan")
@@ -28,7 +32,7 @@ public interface CarFeignClient {
 
     //查询车辆信息
     @GetMapping("/cars/getCarsDetail")
-    JsonResult<GetCarsDetailResponse> getCarsDetail(@RequestParam("carId")String carId, @RequestParam("areaId") String areaId);
+    JsonResult<GetCarsDetailResponse> getCarsDetail(@RequestParam("carId")String carId,@RequestParam("areaId") String areaId, @RequestParam("source") String source);
 
     //查询保险信息
     @GetMapping("/cars/getInsuranceData")

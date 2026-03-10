@@ -46,10 +46,20 @@ public class GetCarsDetailResponse {
     private String standard_oil_wear;  //  标准油耗
     private String battery_capacity;  //  电池容量
     private String endurance;  //  续航里程
+
+    private String net_book_value;
+    private String manufacturer; // 车辆品牌
+    private String manufacturing_date; // 车辆生产日期
+    private String car_weight; // 车辆重量
+    private String emission_standard; // 排放标准
+    private String car_asset_identification; // 车辆资产标识
+    private String car_asset_classification; // 车辆资产分类
+    private String posting_date;
+
     private String hundred_KM_power_consumption;  //  百公里耗电量
     private String seat_num;  //  核定载人数
     private String seat_num2;  //  车辆座位数
-    private String registration_certificate_img_url;  //  机动车登记证书（附件）
+    private List<String> registration_certificate_img_url;  //  机动车登记证书（附件）
     private List<String> driving_license_img;  //  行驶证
     private List<String> buy_tax_img;  //  购车发票（附件）
     private List<String> car_invoice_img;  //  购置税发票（附件）
