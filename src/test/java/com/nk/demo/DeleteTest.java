@@ -45,7 +45,7 @@ public class DeleteTest {
     @Test
     public void testDelete(){
 
-        List<String> strings = FileUtil.readLines("E:\\data\\Intellij\\Download\\2025\\12\\01\\urls.txt", StandardCharsets.UTF_8);
+        List<String> strings = FileUtil.readLines("E:\\data\\Intellij\\Download\\2026\\03\\17\\urls.txt", StandardCharsets.UTF_8);
         String url ="http://10.17.139.183/file/delete";
         RestTemplate restTemplate = new RestTemplate();
 

@@ -69,7 +69,7 @@ public class FeignClientTest {
     @Test
     public void testCarNum(){
 
-        JsonResult<List<GetAllCarsByOrganItem>> allCarsByOrgan = carFeignClient.getAllCarsByOrgan("anh-qy-organ-212", "2010-01-01", "2025-09-09", "0100102111");
+        JsonResult<List<GetAllCarsByOrganItem>> allCarsByOrgan = carFeignClient.getAllCarsByOrgan("0100102102", "2010-01-01", "2025-09-09", "0100102111");
 
         allCarsByOrgan.getData().forEach(car -> {
 

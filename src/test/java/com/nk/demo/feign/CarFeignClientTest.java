@@ -38,7 +38,7 @@ public class CarFeignClientTest {
     @Autowired
     private ThreadPoolTaskExecutor fixThreadPoolExecutor;
 
-    private String areaId = "0100102100";
+    private String areaId = "0100102102";
 
     private String basePath = "E:\\data\\Intellij\\Download\\2025\\11\\25\\cars\\";
 
