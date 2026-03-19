@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @Author: zc
  * @Date: 2025/5/12 16:20
  **/
-@Configuration
+
 public class ThreadPoolConfig {
 
 

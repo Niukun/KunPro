@@ -14,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 文件名称: WebMvcConfig
  * 公司名称: 安徽产业互联数据智能创新中心有限公司
  */
-@Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
