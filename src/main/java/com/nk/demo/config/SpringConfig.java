@@ -1,7 +1,6 @@
 package com.nk.demo.config;
 
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -19,6 +18,5 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan({"com.nk.demo"})
 @PropertySource("classpath:application.properties")
 @MapperScan({"com.nk.demo.mapper"})
-@EnableFeignClients
 public class SpringConfig {
 }
