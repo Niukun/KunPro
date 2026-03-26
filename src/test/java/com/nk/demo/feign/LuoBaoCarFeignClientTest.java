@@ -31,6 +31,9 @@ public class LuoBaoCarFeignClientTest extends TestCase {
         log.info("测试开始");
         JsonResult<List<BasicInfoByOrgIdResponse>> result = luoBaoCarFeignClient.basicInfoByOrgId("a76167dd901d452f90d90126b956ff54");
         List<BasicInfoByOrgIdResponse> data = result.getData();
+        for (int i = 0; i < data.size(); i++) {
+            System.out.println((i+1)+": " + data.get(i).getLicensePlateNo());
+        }
         log.info("车辆数：" + data.size());
         log.info("测试结束");
     }
