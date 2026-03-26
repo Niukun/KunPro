@@ -16,7 +16,8 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @Import({MybatisPlusConfig.class, ThreadPoolConfig.class})
 @ComponentScan({"com.nk.demo"})
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:test.properties")
 @MapperScan({"com.nk.demo.mapper"})
+
 public class SpringConfig {
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * @Author: zc
  * @Date: 2024/9/19 17:34
  **/
-@FeignClient(name = "carFeignClient",url = "${zkml.car.url}")
+@FeignClient(name = "carFeignClient", url = "${zkml.car.url}")
 public interface CarFeignClient {
 
     //查询单位列表

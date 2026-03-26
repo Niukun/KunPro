@@ -1,7 +1,6 @@
 package com.nk.demo.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.ThreadPoolExecutor;
@@ -11,7 +10,6 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @Author: zc
  * @Date: 2025/5/12 16:20
  **/
-
 public class ThreadPoolConfig {
 
 
