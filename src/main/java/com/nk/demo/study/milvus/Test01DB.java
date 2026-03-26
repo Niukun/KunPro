@@ -1,10 +1,11 @@
 package com.nk.demo.study.milvus;
 
 
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.database.request.CreateDatabaseReq;
 import io.milvus.v2.service.database.response.ListDatabasesResp;
+
+import static com.nk.demo.study.milvus.BaseMilvus.DB_NAME;
+import static com.nk.demo.study.milvus.BaseMilvus.client;
 
 /**
  * 创建人：  @author niuk
@@ -13,31 +14,18 @@ import io.milvus.v2.service.database.response.ListDatabasesResp;
  * 文件名称: Test01
  * 公司名称: 安徽产业互联数据智能创新中心有限公司
  */
-public class Test01 {
-
-    private static MilvusClientV2 client;
-
-    private static ConnectConfig config;
+public class Test01DB{
 
 
-
-    static {
-        config = ConnectConfig.builder()
-                .uri("http://localhost:19530")
-                .build();
-        client = new MilvusClientV2(config);
-
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 //        create();
         listDB();
-//        useDb();
+        useDb();
         client.close();
     }
 
-    private static void useDb() {
-
+    private static void useDb() throws InterruptedException {
+        client.useDatabase(DB_NAME);
 
     }
 
@@ -52,7 +40,6 @@ public class Test01 {
     private static void listDB() {
         ListDatabasesResp response = client.listDatabases() ;
         response.getDatabaseNames().forEach(System.out::println);
-
     }
 
 
