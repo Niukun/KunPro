@@ -26,3 +26,5 @@ zkml:
     url: https://employee.izkml.cn/api
   car:
     url: https://car-files-sd.mlcfg.online
+  luobao:
+    url: https://gateway-lb.izkml.cn/report/
