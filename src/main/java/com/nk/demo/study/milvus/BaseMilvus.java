@@ -23,7 +23,7 @@ public class BaseMilvus {
 
     static {
         config = ConnectConfig.builder()
-                .uri("http://localhost:19530")
+                .uri("http://localhost:19531")
                 .build();
         client = new MilvusClientV2(config);
 
