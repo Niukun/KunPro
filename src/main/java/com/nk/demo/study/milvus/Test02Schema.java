@@ -5,7 +5,6 @@ import io.milvus.v2.common.IndexParam;
 import io.milvus.v2.service.collection.request.*;
 import io.milvus.v2.service.collection.response.DescribeCollectionResp;
 import io.milvus.v2.service.collection.response.ListCollectionsResp;
-import io.milvus.v2.service.utility.request.FlushReq;
 
 import java.util.ArrayList;
 import java.util.List;

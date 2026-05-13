@@ -192,3 +192,13 @@
 /.idea/modules.xml
 /.idea/vcs.xml
 /.idea/workspace.xml
+/target/test-classes/com/nk/demo/entity/AddressTest.class
+/target/test-classes/com/nk/demo/entity/FileTest.class
+/target/test-classes/com/nk/demo/entity/PaperFileTest.class
+/target/test-classes/com/nk/demo/entity/UserTest.class
+/target/test-classes/com/nk/demo/feign/CarFeignClientTest.class
+/target/test-classes/com/nk/demo/feign/LuoBaoCarFeignClientTest.class
+/target/test-classes/com/nk/demo/ocr/OCRTest.class
+/target/test-classes/com/nk/demo/DeleteTest.class
+/target/test-classes/com/nk/demo/DemoApplicationTests.class
+/target/test-classes/com/nk/demo/FeignClientTest.class

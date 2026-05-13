@@ -38,29 +38,86 @@ public class CarFeignClientTest {
     @Autowired
     private ThreadPoolTaskExecutor fixThreadPoolExecutor;
 
-    private String areaId = "0100102102";
+    private String areaId = "0100102102105";
 
     private String basePath = "E:\\data\\Intellij\\Download\\2025\\11\\25\\cars\\";
 
-
+//commonCarFileTask.execute('0100117100','CLW-SUPERVISE-TOG','CLDA','2010-01-01',
+// '','14232489-4e5a-4ed9-b614-dae03d29ad27-0100117100','2136','1','true','false','false','ALL')
     /**
      * 查询监督管理平台下所有单位一共多少车
      */
     @Test
     public void getAllOrgans() {
-        List<OrganInfoResponse> all = carFeignClient.getOrgansName(areaId, "1", "GOVERMENT").getData();
+        List<OrganInfoResponse> all = carFeignClient.getOrgansName(areaId, "1", "ALL").getData();
 
         int number = 0;
+        StringBuilder stringBuilder = new StringBuilder();
         for (OrganInfoResponse organsItem : all) {
-//            System.out.println(organsItem);
             String organId = organsItem.getOrgan_id();
-
-            List<GetAllCarsByOrganItem> data = carFeignClient.getAllCarsByOrgan(organId, "2010-01-01", "2026-03-03", areaId).getData();
+            List<GetAllCarsByOrganItem> data = carFeignClient.getAllCarsByOrgan(organId, "2010-01-01", "2036-03-03", areaId).getData();
             number += data.size();
-            System.out.println("当前单位：" + organsItem.getOrgan_name() + "车辆数量：" + data.size());
-
+            if (stringBuilder.length() > 0) {
+                stringBuilder.append(",");
+            }
+            stringBuilder.append("'").append(organId).append("'");
+            System.out.println("单位id：" + organId + "当前单位：" + organsItem.getOrgan_name() + "，车辆数量：" + data.size());
+            System.out.println(organsItem.getOrgan_name());
         }
+        System.out.println("delete from tb_car_statistics_real_time WHERE own_organ_id IN (" + stringBuilder.toString() + ");");
         System.out.println("车辆总数：" + number);
+    }
+
+
+    @Test
+    public void getCarNoByCarids(){
+
+        //1. 解析carids.json文件，获取里面所有的car_id
+        String jsonPath = "src/test/java/com/nk/demo/feign/carids.json";
+        String jsonContent = FileUtil.readUtf8String(new File(jsonPath));
+        List<JSONObject> carIdList = JSONObject.parseArray(jsonContent, JSONObject.class);
+        if (carIdList == null || carIdList.isEmpty()) {
+            log.warn("carids.json文件中没有数据");
+            return;
+        }
+
+        log.info("共解析到{}辆车的ID", carIdList.size());
+        //2. 遍历刚刚获得的carids，用carFeignClient.getCarsDetail方法，把所有车辆详情获取到，打印出车辆详情，其中areaid是0100102102105
+        String targetAreaId = "0100102102105";
+        int successCount = 0;
+        int failCount = 0;
+
+        for (int i = 0; i < carIdList.size(); i++) {
+            JSONObject carInfo = carIdList.get(i);
+            String carId = carInfo.getString("car_id");
+            String source = carInfo.getString("source");
+
+            if (StrUtil.isBlank(carId)) {
+                log.warn("第{}条数据的car_id为空，跳过", i + 1);
+                continue;
+            }
+
+            try {
+                JsonResult<GetCarsDetailResponse> result = carFeignClient.getCarsDetail(carId, targetAreaId, source);
+
+                if (result != null && result.getData() != null) {
+                    GetCarsDetailResponse carDetail = result.getData();
+                    System.out.println("车辆[" + (i + 1) + "/" + carIdList.size() + "] - ID: " + carId + " - 车牌号: " + carDetail.getCar_no());
+
+                    successCount++;
+                } else {
+                    log.warn("车辆[{}]查询返回空数据", carId);
+                    failCount++;
+                }
+            } catch (Exception e) {
+                log.error("查询车辆详情失败，carId: {}", carId, e);
+                failCount++;
+            }
+        }
+
+        log.info("查询完成，成功: {}, 失败: {}", successCount, failCount);
+
+
     }
 
     /**
