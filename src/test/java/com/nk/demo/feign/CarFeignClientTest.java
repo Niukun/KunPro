@@ -38,7 +38,7 @@ public class CarFeignClientTest {
     @Autowired
     private ThreadPoolTaskExecutor fixThreadPoolExecutor;
 
-    private String areaId = "0100102102105";
+    private String areaId = "0100120104104";
 
     private String basePath = "E:\\data\\Intellij\\Download\\2025\\11\\25\\cars\\";
 
@@ -46,6 +46,7 @@ public class CarFeignClientTest {
 // '','14232489-4e5a-4ed9-b614-dae03d29ad27-0100117100','2136','1','true','false','false','ALL')
     /**
      * 查询监督管理平台下所有单位一共多少车
+     * 把车辆id用逗号连接起来
      */
     @Test
     public void getAllOrgans() {
@@ -56,15 +57,23 @@ public class CarFeignClientTest {
         for (OrganInfoResponse organsItem : all) {
             String organId = organsItem.getOrgan_id();
             List<GetAllCarsByOrganItem> data = carFeignClient.getAllCarsByOrgan(organId, "2010-01-01", "2036-03-03", areaId).getData();
-            number += data.size();
-            if (stringBuilder.length() > 0) {
+            //把data中的每个元素中的car_id取出来，放到一个list中，最后把这个list转换成字符串，格式是：'car_id1','car_id2','car_id3'，然后打印这个字符串
+            List<String> carIds = data.stream().map(GetAllCarsByOrganItem::getCar_id).toList();
+            if(carIds.size()> 0){
+                stringBuilder.append(String.join(",", carIds));
                 stringBuilder.append(",");
             }
-            stringBuilder.append("'").append(organId).append("'");
+
+            number += data.size();
+//            if (stringBuilder.length() > 0) {
+//                stringBuilder.append(",");
+//            }
+//            stringBuilder.append("'").append(organId).append("'");
             System.out.println("单位id：" + organId + "当前单位：" + organsItem.getOrgan_name() + "，车辆数量：" + data.size());
             System.out.println(organsItem.getOrgan_name());
         }
-        System.out.println("delete from tb_car_statistics_real_time WHERE own_organ_id IN (" + stringBuilder.toString() + ");");
+        System.out.println("carIds: " + stringBuilder.toString());
+//        System.out.println("delete from tb_car_statistics_real_time WHERE own_organ_id IN (" + stringBuilder.toString() + ");");
         System.out.println("车辆总数：" + number);
     }
 
@@ -213,9 +222,9 @@ public class CarFeignClientTest {
         System.out.println("一共有" + organsItemList.size() + "个单位");
         int num = 0;
         for (OrganInfoResponse organsItem : organsItemList) {
-            List<GetAllCarsByOrganItem> allCars = carFeignClient.getAllCarsByOrgan(organsItem.getOrgan_id(), "2010-01-01", "2026-12-20", areaId).getData();
+            List<GetAllCarsByOrganItem> allCars = carFeignClient.getAllCarsByOrgan(organsItem.getOrgan_id(), "1010-01-01", "2026-12-20", areaId).getData();
             num += allCars.size();
-            System.out.println((organsItemList.indexOf(organsItem) + 1) + ",当前单位" + organsItem.getOrgan_name() + "车辆：" + allCars.size() + ",累计辆车：" + num);
+            System.out.println((organsItemList.indexOf(organsItem) + 1) + "：" + organsItem.getOrgan_name() + "车辆：" + allCars.size() + ",累计辆车：" + num);
         }
         System.out.println("一共有" + num + "辆车");
     }
@@ -245,7 +254,7 @@ public class CarFeignClientTest {
      */
     @Test
     public void getDisposalCarId() {
-        List<GetCarDisposalResponse> organsItemList = carFeignClient.getDisposalCarId("2010-01-01", "2025-12-21", areaId).getData();
+        List<GetCarDisposalResponse> organsItemList = carFeignClient.getDisposalCarId("2010-01-01", "2028-12-21", areaId).getData();
         System.out.println("一共有" + organsItemList.size() + "辆车");
 
 
