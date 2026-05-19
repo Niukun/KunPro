@@ -1,26 +1,19 @@
 package com.nk.demo;
 
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.core.date.DateUtil;
 import com.nk.demo.feign.CarFeignClient;
 import com.nk.demo.feign.ConvertClient;
 import com.nk.demo.feign.ZkmlStaffFeignClient;
 import com.nk.demo.feign.response.dataRepo.GetAllCarsByOrganItem;
 import com.nk.demo.feign.response.dataRepo.GetCarsDetailResponse;
-import com.nk.demo.ml.staff.GetStaffBaseInfoResponse;
 import com.nk.demo.ml.staff.JsonResult;
 import com.nk.demo.ml.staff.StaffResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 @SpringBootTest
@@ -39,6 +32,12 @@ public class FeignClientTest {
     public void testAdd() {
         Integer result = convertClient.add(1, 2);
         System.out.println(result);
+    }
+
+    @Test
+    public void testGetOrgList() {
+        int year = DateUtil.year(DateUtil.date());
+        System.out.println( year);
     }
 
     @Test
