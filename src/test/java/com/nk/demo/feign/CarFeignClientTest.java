@@ -38,7 +38,7 @@ public class CarFeignClientTest {
     @Autowired
     private ThreadPoolTaskExecutor fixThreadPoolExecutor;
 
-    private String areaId = "0100102100";
+    private String areaId = "0100120104";
 
     private String basePath = "E:\\data\\Intellij\\Download\\2025\\11\\25\\cars\\";
 
@@ -69,8 +69,12 @@ public class CarFeignClientTest {
                 stringBuilder.append(",");
             }
 //            stringBuilder.append("'").append(organId).append("'");
-            System.out.println("单位id：" + organId + "当前单位：" + organsItem.getOrgan_name() + "，车辆数量：" + data.size());
-            System.out.println(organsItem.getOrgan_name());
+            System.out.println("\"" + organId + "\"");
+
+            if("cb87837be7c748249c9fb41a69117bc7".equalsIgnoreCase(organId)){
+                System.out.println("单位id：" + organId + "当前单位：" + organsItem.getOrgan_name() + "，车辆数量：" + data.size());
+            }
+//            System.out.println(organsItem.getOrgan_name());
         }
         System.out.println("carIds: " + stringBuilder.toString());
 //        System.out.println("delete from tb_car_statistics_real_time WHERE own_organ_id IN (" + stringBuilder.toString() + ");");
@@ -134,7 +138,7 @@ public class CarFeignClientTest {
      */
     @Test
     public void testGetAllOrganCars() {
-        List<OrganInfoResponse> organsItemList = carFeignClient.getOrgansName(areaId, "1", "ALL").getData();
+        List<OrganInfoResponse> organsItemList = carFeignClient.getOrgansName(areaId, "1", "GOVERMENT").getData();
 
         AtomicInteger carNum = new AtomicInteger();
         organsItemList.forEach(organsItem -> {
@@ -217,7 +221,7 @@ public class CarFeignClientTest {
      */
     @Test
     public void getAllCarNumByAreaId() {
-        List<OrganInfoResponse> organsItemList = carFeignClient.getOrgansName(areaId, "1", "ALL").getData();
+        List<OrganInfoResponse> organsItemList = carFeignClient.getOrgansName(areaId, "1", "GOVERMENT").getData();
 
         System.out.println("一共有" + organsItemList.size() + "个单位");
         int num = 0;
@@ -235,10 +239,13 @@ public class CarFeignClientTest {
     @Test
     public void getAllCarNumByOrgId() {
         List<GetAllCarsByOrganItem> allCars = carFeignClient.getAllCarsByOrgan(
-                "anh-qy-organ-197",
+                "anh-qy-organ-2246",
                 "2010-01-01",
-                "2026-12-20",
-                "0100102114").getData();
+                "2025-12-31",
+                "0100102110").getData();
+        for (GetAllCarsByOrganItem item : allCars) {
+            System.out.println(item.getCertificate_time());
+        }
         System.out.println("一共有" + allCars.size() + "辆车");
     }
 
@@ -248,7 +255,7 @@ public class CarFeignClientTest {
      */
     @Test
     public void getDisposalCarId() {
-        List<GetCarDisposalResponse> organsItemList = carFeignClient.getDisposalCarId("2026-01-01", "2038-12-21", "0100120107100").getData();
+        List<GetCarDisposalResponse> organsItemList = carFeignClient.getDisposalCarId("2026-01-01", "2038-12-21", "0100120104").getData();
         System.out.println("一共有" + organsItemList.size() + "辆车");
         for (GetCarDisposalResponse item : organsItemList) {
             System.out.println(item);

@@ -40,8 +40,8 @@ public class FileTest {
     }
     @Test
     public void fileCompare() throws IOException {
-        Path path1 = Paths.get("E:\\data\\Intellij\\Download\\2026\\06\\09\\11\\410.txt");
-        Path path2 = Paths.get("E:\\data\\Intellij\\Download\\2026\\06\\09\\11\\408.txt");
+        Path path1 = Paths.get("E:\\data\\Intellij\\Download\\2026\\06\\25\\50.txt");
+        Path path2 = Paths.get("E:\\data\\Intellij\\Download\\2026\\06\\25\\49.txt");
         List<String> lines1 = Files.readAllLines(path1);
         List<String> lines2 = Files.readAllLines(path2);
 
@@ -61,13 +61,13 @@ public class FileTest {
 
         System.out.println("===== 只存在于文件1中的字符串 (共 " + onlyInFile1.size() + " 个) =====");
         onlyInFile1.stream().sorted().forEach(line ->
-                System.out.println("[410.txt] " + line)
+                System.out.println(line)
         );
         System.out.println();
 
         System.out.println("===== 只存在于文件2中的字符串 (共 " + onlyInFile2.size() + " 个) =====");
         onlyInFile2.stream().sorted().forEach(line ->
-                System.out.println("[408.txt] " + line)
+                System.out.println(line)
         );
         System.out.println();
 
